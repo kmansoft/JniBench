@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Jni Bench</string>
+    <string name="bench_small_array">Small array</string>
+    <string name="bench_large_array">Large array</string>
+</resources>
