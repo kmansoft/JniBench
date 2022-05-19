@@ -7,7 +7,7 @@
 #include <android/log.h>
 
 static const char TAG[] = "array_access_benchmark";
-static int nextIndex = 0;
+static unsigned int nextIndex = 0;
 
 extern "C" {
 
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_org_kman_jnibench_ArrayAccessBenchmark_doit
     // __android_log_print(ANDROID_LOG_INFO, TAG, "isCopy = %d", isCopy);
 
     for (int i = 0; i < 1000; i += 1) {
-        int index = nextIndex % size;
+        unsigned int index = nextIndex % size;
         ptr[index] += 1;
         nextIndex += 1;
     }
