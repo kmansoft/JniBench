@@ -7,10 +7,10 @@ link_libraries(
 
 add_library(
         # Specifies the name of the library.
-        array_access_benchmark
+        benchmark
 
         # Sets the library as a shared library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        src/main/cpp/array_access_benchmark.cpp)
+        src/main/cpp/benchmark.cpp)

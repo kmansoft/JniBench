@@ -2,21 +2,29 @@
 // Created by kman on 5/19/22.
 //
 
-#include "../jni/org_kman_jnibench_ArrayAccessBenchmark.h"
+#include "../jni/org_kman_jnibench_Benchmark.h"
 
 #include <android/log.h>
 
-static const char TAG[] = "array_access_benchmark";
+static const char TAG[] = "benchmark";
 static unsigned int nextIndex = 0;
+static int nextCall = 0;
 
 extern "C" {
 
-JNIEXPORT void JNICALL Java_org_kman_jnibench_ArrayAccessBenchmark_doit
+JNIEXPORT jint JNICALL Java_org_kman_jnibench_Benchmark_doitNoArray
+        (JNIEnv *, jobject, jint) {
+
+    nextCall += 1;
+    return nextCall;
+}
+
+JNIEXPORT jint JNICALL Java_org_kman_jnibench_Benchmark_doitArray
         (JNIEnv *env, jobject self, jbyteArray array, jint runIndex) {
 
     jboolean isCopy = false;
-    jbyte *ptr = env->GetByteArrayElements(array, &isCopy);
     jsize size = env->GetArrayLength(array);
+    jbyte *ptr = env->GetByteArrayElements(array, &isCopy);
 
     // __android_log_print(ANDROID_LOG_INFO, TAG, "isCopy = %d", isCopy);
 
@@ -27,6 +35,9 @@ JNIEXPORT void JNICALL Java_org_kman_jnibench_ArrayAccessBenchmark_doit
     }
 
     env->ReleaseByteArrayElements(array, ptr, JNI_COMMIT);
+
+    nextCall += 1;
+    return nextCall;
 }
 
 }
