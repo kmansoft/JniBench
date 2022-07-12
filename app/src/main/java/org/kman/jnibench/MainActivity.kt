@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         outputText("Performed $ITER_COUNT iterations")
-        outputText("Average per iteration: %.4f ms", average)
+        outputAverage(average)
     }
 
     private fun doNoArrayBenchmarkImpl(): Float {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         outputText("Performed $ITER_COUNT iterations")
-        outputText("Average per iteration: %.4f ms", average)
+        outputAverage(average)
     }
 
     private fun doArrayBenchmarkImpl(size: Int): Float {
@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity() {
         return (ms1 - ms0).toFloat() / ITER_COUNT
     }
 
-    private fun outputText(format: String, vararg args: Any?) {
-        val msg = String.format(Locale.US, format, *args)
+    private fun outputAverage(v:Float) {
+        val msg = String.format(Locale.US, "Average per iteration: %.4f ms", v)
         outputText(msg)
     }
 
